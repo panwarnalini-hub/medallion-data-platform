@@ -45,6 +45,7 @@ Production logic is isolated under `src/`, while `demos/` contains non-productio
     ├── scripts/                      # Execution and orchestration helpers
     │   ├── run-gesture-pipeline.ps1
     │   └── run-gesture-demo.ps1
+    |   └── run-kiosk.ps1
     │
     ├── requirements.txt
     ├── README.md
