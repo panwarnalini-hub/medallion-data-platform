@@ -11,6 +11,7 @@ The system converts raw vision-based gesture data into analytics- and ML-ready f
 This platform follows a strict Medallion architecture. Each layer is isolated and independently executable.
 
 
+
 * **Raw Input:** (Webcam / MediaPipe)
 * **Bronze:** Raw, append-only ingestion.
 * **Silver:** Normalized, time-aligned, quality-scored data.
@@ -28,23 +29,27 @@ This platform follows a strict Medallion architecture. Each layer is isolated an
 
 ## Repository Structure
 
+Production logic is isolated under `src/`, while `demos/` contains non-production, illustrative examples. Execution and orchestration helpers are kept under `scripts/` to avoid mixing business logic with entry points.
+
     medallion-data-platform/
-    ├── bronze_data/              # Raw sessions (append-only)
-    ├── silver_data/              # Cleaned & normalized sessions
-    ├── gold_data/                # ML-ready feature vectors
+    ├── src/                          # Production pipeline code
+    │   ├── bronze_ingestion.py       # Webcam - Bronze (raw ingestion)
+    │   ├── silver_transform.py       # Bronze - Silver (normalization & cleaning)
+    │   ├── gold_features.py          # Silver - Gold (feature engineering)
+    │   └── gesture_classifier.py     # Deterministic gesture logic
     │
-    ├── bronze_ingestion.py       # Webcam - Bronze
-    ├── silver_transform.py       # Bronze - Silver
-    ├── gold_features.py          # Silver - Gold
+    ├── demos/                        # Interactive / demo-only code
+    │   ├── demo_classifier.py        # Real-time gesture classification demo
+    │   └── demo_kiosk.py             # Gesture-driven UI demo
     │
-    ├── gesture_classifier.py     # Deterministic gesture logic
-    ├── demo_classifier.py        # Real-time classification demo
-    ├── demo_kiosk.py             # Gesture-driven UI demo
+    ├── scripts/                      # Execution and orchestration helpers
+    │   ├── run-gesture-pipeline.ps1
+    │   └── run-gesture-demo.ps1
     │
-    ├── run-gesture-pipeline.ps1
-    ├── run-gesture-demo.ps1
     ├── requirements.txt
-    └── README.md
+    ├── README.md
+    ├── LICENSE
+    └── .gitignore
 
 ---
 
@@ -60,7 +65,7 @@ This platform follows a strict Medallion architecture. Each layer is isolated an
 
 **Run:**
 
-    python bronze_ingestion.py
+    python src/bronze_ingestion.py
 
 ### Silver Layer : Transformation
 **Responsibility:** Normalize raw data into a consistent, analyzable form.
@@ -75,7 +80,7 @@ This platform follows a strict Medallion architecture. Each layer is isolated an
 
 **Run:**
 
-    python silver_transform.py
+    python src/silver_transform.py
 
 ### Gold Layer : Feature Engineering
 **Responsibility:** Produce ML-ready features with stable semantics.
@@ -95,7 +100,7 @@ This platform follows a strict Medallion architecture. Each layer is isolated an
 
 **Run:**
 
-    python gold_features.py
+    python src/gold_features.py
 
 ---
 
@@ -104,12 +109,12 @@ This platform follows a strict Medallion architecture. Each layer is isolated an
 ### Gesture Classifier
 Real-time gesture classification with visual feedback.
 
-    python demo_classifier.py
+    python demos/demo_classifier.py
 
 ### Touchless Kiosk
 End-to-end gesture-driven UI using WebSockets.
 
-    python demo_kiosk.py
+    python demos/demo_kiosk.py
 
 ---
 
