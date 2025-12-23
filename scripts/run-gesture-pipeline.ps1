@@ -17,20 +17,20 @@ if (Test-Path ".\.venv\Scripts\Activate.ps1") {
 }
 
 # Step 1: Bronze
-Write-Host "`n[1/3] BRONZE - Raw Data Capture" -ForegroundColor Yellow
+Write-Host "`n[1/3] BRONZE : Raw Data Capture" -ForegroundColor Yellow
 Write-Host "Hold hand in front of camera, press 'q' to stop" -ForegroundColor Gray
 python .\src\bronze_ingestion.py
 
 if ($LASTEXITCODE -ne 0) { Write-Host "Bronze failed!" -ForegroundColor Red; exit 1 }
 
 # Step 2: Silver
-Write-Host "`n[2/3] SILVER - Transform & Normalize" -ForegroundColor Yellow
+Write-Host "`n[2/3] SILVER : Transform & Normalize" -ForegroundColor Yellow
 python .\src\silver_transform.py
 
 if ($LASTEXITCODE -ne 0) { Write-Host "Silver failed!" -ForegroundColor Red; exit 1 }
 
 # Step 3: Gold
-Write-Host "`n[3/3] GOLD - Feature Engineering" -ForegroundColor Yellow
+Write-Host "`n[3/3] GOLD : Feature Engineering" -ForegroundColor Yellow
 python .\src\gold_features.py
 
 if ($LASTEXITCODE -ne 0) { Write-Host "Gold failed!" -ForegroundColor Red; exit 1 }
