@@ -33,12 +33,12 @@ Production logic is isolated under `src/`, while `demos/` contains non-productio
 
     medallion-data-platform/
     ├── src/                          # Production pipeline code
-    │   ├── bronze_ingestion.py       # Webcam - Bronze (raw ingestion)
-    │   ├── silver_transform.py       # Bronze - Silver (normalization & cleaning)
-    │   ├── gold_features.py          # Silver - Gold (feature engineering)
+    │   ├── bronze_ingestion.py       # Webcam : Bronze (raw ingestion)
+    │   ├── silver_transform.py       # Bronze : Silver (normalization & cleaning)
+    │   ├── gold_features.py          # Silver : Gold (feature engineering)
     │   └── gesture_classifier.py     # Deterministic gesture logic
     │
-    ├── demos/                        # Interactive / demo-only code
+    ├── demos/                        # Interactive / demo-only code (non-production)
     │   ├── demo_classifier.py        # Real-time gesture classification demo
     │   └── demo_kiosk.py             # Gesture-driven UI demo
     │
