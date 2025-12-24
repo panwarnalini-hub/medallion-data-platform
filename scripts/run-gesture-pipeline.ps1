@@ -8,7 +8,7 @@ Set-Location "$PSScriptRoot\.."
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "  MEDALLION GESTURE PIPELINE" -ForegroundColor Cyan
-Write-Host "  Bronze -> Silver -> Gold" -ForegroundColor Cyan
+Write-Host "  Bronze - Silver - Gold" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 
 # Activate venv if exists
